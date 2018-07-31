@@ -10,11 +10,11 @@ const authRoutes = require('./routes/auth');
 const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
-
+const keys = require('./config/keys')
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('')
+mongoose.connect(keys.mongoURI)
     .then(() => console.log('MongoDB connected!'))
     .catch(error => console.log(error))
 

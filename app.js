@@ -1,6 +1,7 @@
 const express = require('express')
 // Add Mongoose is a MongoDB object modeling tool
 const mongoose = require('mongoose')
+const passport = require('passport')
 // Add BodyParser
 const bodyParser = require('body-parser')
 
@@ -18,8 +19,12 @@ mongoose.connect(keys.mongoURI)
     .then(() => console.log('MongoDB connected!'))
     .catch(error => console.log(error))
 
+app.use(passport.initialize())
+require('./middleware/passport')(passport)
+
 // Add and Use Morgan
 app.use(require('morgan')('dev'))
+app.use('/uploads', express.static('uploads'))
 // Use bodyParser
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
